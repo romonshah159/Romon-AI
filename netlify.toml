@@ -1,0 +1,27 @@
+[build]
+  publish = "."
+
+[[plugins]]
+  package = "netlify-plugin-inline-functions-env"
+
+[template.environment]
+  API_KEY_1 = "API_KEY_1"
+  API_KEY_2 = "API_KEY_2"
+  API_KEY_3 = "API_KEY_3"
+  API_KEY_4 = "API_KEY_4"
+  API_KEY_5 = "API_KEY_5"
+  API_KEY_6 = "API_KEY_6"
+  API_KEY_7 = "API_KEY_7"
+  API_KEY_8 = "API_KEY_8"
+  API_KEY_9 = "API_KEY_9"
+  API_KEY_10 = "API_KEY_10"
+  API_KEY_11 = "API_KEY_11"
+  API_KEY_12 = "API_KEY_12"
+  API_KEY_13 = "API_KEY_13"
+  API_KEY_14 = "API_KEY_14"
+  API_KEY_15 = "API_KEY_15"
+  API_KEY_16 = "API_KEY_16"
+  API_KEY_17 = "API_KEY_17"
+  API_KEY_18 = "API_KEY_18"
+  API_KEY_19 = "API_KEY_19"
+  API_KEY_20 = "API_KEY_20"

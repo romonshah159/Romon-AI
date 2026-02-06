@@ -294,8 +294,8 @@
             chatContainer.innerHTML += `<div class="user-message-wrapper">${msg}</div>`;
             saveMessageToHistory('user', msg);
             input.value = ""; input.style.height = "auto";
-            const aiId = "ai-" + Date.now();
             
+            const aiId = "ai-" + Date.now();
             chatContainer.innerHTML += `
                 <div class="ai-message-wrapper">
                     <span class="ai-name ${currentAIColor}">${currentAI}</span>
@@ -311,22 +311,20 @@
                 </div>`;
             chatContainer.scrollTop = chatContainer.scrollHeight;
 
-            // ২০টি কী এর মধ্য থেকে র‍্যান্ডম ভাবে সিলেক্ট করার লজিক
+            // ২০টি কী এর মধ্য থেকে র‍্যান্ডম ভাবে সিলেক্ট করার লজিক (Client-side proxy check)
             let success = false;
-            let availableKeys = Array.from({length: 20}, (_, i) => i + 1); // [1, 2, ..., 20]
-            
-            // র‍্যান্ডম করার জন্য অ্যারেটি এলোমেলো করা হলো
+            let availableKeys = Array.from({length: 20}, (_, i) => i + 1);
             availableKeys.sort(() => Math.random() - 0.5);
 
             for (let keyNum of availableKeys) {
                 try {
-                    // Netlify Environment Variable-er value fetch kora
-                    // Note: window.env variable-ti Netlify auto inject kore (site build-er somoy setup thakle)
+                    // Netlify Environment Variable-er access code
                     const keyName = `API_KEY_${keyNum}`;
-                    const currentKey = window.process ? process.env[keyName] : null; 
-
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${window[keyName] || 'AIzaSy' + '...'}`, {
-                        method: 'POST', headers: {'Content-Type': 'application/json'},
+                    
+                    // Netlify Variable direct access fetch call (Using Proxy logic or direct if exposed)
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${window[keyName] || ''}`, {
+                        method: 'POST', 
+                        headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({ contents: [{ parts: [{ text: msg }] }] })
                     });
 
@@ -340,11 +338,11 @@
                         success = true;
                         break; 
                     }
-                } catch (e) { console.log(`Random Key Try ${keyNum} failed...`); }
+                } catch (e) { console.log(`Key ${keyNum} error.`); }
             }
 
             if (!success) {
-                document.getElementById(aiId).innerText = "No API Key is working. Please check Netlify settings.";
+                document.getElementById(aiId).innerText = "Error: Please refresh or check API configuration.";
             }
         }
 
