@@ -113,8 +113,8 @@
 
     <div id="unlock-overlay">
         <div class="unlock-card">
-            <div class="unlock-title">পরবর্তি ১২ ঘণ্টা চ্যাট করার জন্য আনলক করুন</div>
-            <div class="unlock-desc">আমাদের সার্ভিসটি ফ্রি রাখার জন্য একটি ছোট বিজ্ঞাপন দেখুন। আনলক বাটনে ক্লিক করে ৫ সেকেন্ড অপেক্ষা করুন।</div>
+            <div class="unlock-title">Unlock Premium Access for 12 Hours</div>
+            <div class="unlock-desc">To keep Romon AI free and sustainable, please watch a quick ad. Click "Unlock Now" and wait just 5 seconds to continue your chat.</div>
             <a href="https://otieu.com/4/10582847" target="_blank" class="unlock-btn" id="mentag-link" onclick="startAdProcess()">Unlock Now</a>
             <div id="timer-display" style="margin-top: 15px; color: #8ab4f8; font-weight: bold;"></div>
             <button id="ad-close-btn" onclick="completeUnlock()">Close</button>
@@ -421,7 +421,7 @@
         async function handleSend() {
             if (!isUnlocked()) {
                 let count = getMsgCount();
-                if (count >= 3) {
+                if (count >= 1) {
                     document.getElementById('unlock-overlay').style.display = 'flex';
                     return;
                 }
